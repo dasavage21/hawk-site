@@ -3,65 +3,105 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HawkC — 2025 Site</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="color-scheme" content="dark light" />
+  <title>HawkC — 2025</title>
+
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.8em%22 font-size=%2290%22>🦅</text></svg>">
 </head>
 <body>
-  <div class="bg"></div>
+  <!-- Animated background -->
+  <div class="bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="noise"></div>
+  </div>
+
+  <!-- Nav -->
   <header class="nav">
     <a class="logo" href="#">🦅 HawkC</a>
-    <nav>
+    <nav class="links">
       <a href="#projects">Projects</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
+  <!-- Hero -->
   <section class="hero">
-    <h1 class="fade-in">Future-ready <span>2025</span> Designs</h1>
-    <p class="fade-in delay">Fast, modern, and beautiful. Powered by GitHub Pages.</p>
-    <div class="cta fade-in delay2">
-      <a class="btn" href="#projects">🚀 Explore</a>
-      <a class="btn ghost" href="#contact">✉ Contact</a>
+    <div class="container">
+      <h1 class="reveal">Future-ready <span>2025</span> Designs</h1>
+      <p class="lead reveal delay">
+        Sleek, fast, and mobile-first. Deployed on GitHub Pages.
+      </p>
+      <div class="cta reveal delay2">
+        <a class="btn" href="#projects">🚀 Explore</a>
+        <a class="btn ghost" href="#contact">✉ Contact</a>
+      </div>
     </div>
   </section>
 
   <main class="container">
-    <section id="projects" class="grid">
-      <div class="card">
-        <h3>BlazeMates</h3>
-        <p>Next-gen social app with real-time chat + gamification.</p>
-      </div>
-      <div class="card">
-        <h3>Fake Bank</h3>
-        <p>Bank simulator with stocks, badges, and slick GUI.</p>
-      </div>
-      <div class="card">
-        <h3>SkySnapz</h3>
-        <p>E-commerce site for sky photos (299+ images).</p>
+
+    <!-- Project cards -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>BlazeMates</h3>
+          <p>Next-gen social app with real-time chat + gamification.</p>
+          <a class="more" href="#">View repo →</a>
+        </article>
+        <article class="card">
+          <h3>Fake Bank</h3>
+          <p>Bank simulator with stocks, badges, and a slick GUI.</p>
+          <a class="more" href="#">View repo →</a>
+        </article>
+        <article class="card">
+          <h3>SkySnapz</h3>
+          <p>E-commerce for sky photos (299+ images).</p>
+          <a class="more" href="#">View repo →</a>
+        </article>
       </div>
     </section>
 
+    <!-- About -->
     <section id="about">
-      <h2>About Me</h2>
-      <p>I’m HawkC13 — builder of apps, games, and simulations. Always chasing first place.</p>
+      <h2>About</h2>
+      <p>
+        I’m <strong>HawkC13</strong>—I build apps, games, and simulations with a bias for speed and polish.
+        Always chasing first place.
+      </p>
     </section>
 
+    <!-- Contact -->
     <section id="contact">
       <h2>Contact</h2>
-      <p>Reach me on GitHub: <a href="https://github.com/your-username" target="_blank">github.com/your-username</a></p>
+      <p>Reach me on GitHub: <a href="https://github.com/your-username" target="_blank" rel="noopener">github.com/your-username</a></p>
     </section>
   </main>
 
-  <footer>
+  <footer class="footer">
     © <span id="y"></span> HawkC — Made with ❤️
   </footer>
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // simple scroll reveal
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e => e.isIntersecting && e.target.classList.add('in'));
+    }, {threshold: 0.2});
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
