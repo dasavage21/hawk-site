@@ -4,104 +4,130 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="color-scheme" content="dark light" />
-  <title>HawkC — 2025</title>
+  <title>HawkC — Official</title>
 
-  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
-
-  <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.8em%22 font-size=%2290%22>🦅</text></svg>">
 </head>
 <body>
-  <!-- Animated background -->
-  <div class="bg">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
-    <div class="noise"></div>
+  <!-- Background -->
+  <div class="backdrop">
+    <div class="blob a"></div>
+    <div class="blob b"></div>
+    <div class="gridlines"></div>
   </div>
 
-  <!-- Nav -->
-  <header class="nav">
-    <a class="logo" href="#">🦅 HawkC</a>
-    <nav class="links">
-      <a href="#projects">Projects</a>
+  <!-- Top Bar -->
+  <header class="topbar">
+    <a class="brand" href="#">🦅 HawkC</a>
+    <nav class="navlinks">
+      <a href="#work">Work</a>
       <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#contact" class="chip">Contact</a>
     </nav>
   </header>
 
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <h1 class="reveal">Future-ready <span>2025</span> Designs</h1>
-      <p class="lead reveal delay">
-        Sleek, fast, and mobile-first. Deployed on GitHub Pages.
-      </p>
-      <div class="cta reveal delay2">
-        <a class="btn" href="#projects">🚀 Explore</a>
-        <a class="btn ghost" href="#contact">✉ Contact</a>
+      <h1 class="title">
+        Building <span class="rotate" aria-live="polite">
+          <b>apps</b><b>games</b><b>experiences</b><b>systems</b>
+        </span>
+        that ship.
+      </h1>
+      <p class="subtitle">Fast. Polished. 2025-level design—no filler.</p>
+      <div class="actions">
+        <a class="btn primary" href="#work">See Work</a>
+        <a class="btn ghost" href="#contact">Get in Touch</a>
       </div>
     </div>
   </section>
 
+  <!-- Work -->
   <main class="container">
+    <section id="work" class="work">
+      <h2>Featured Work</h2>
+      <div class="cards">
+        <article class="card">
+          <header>
+            <span class="tag">Mobile</span>
+            <h3>BlazeMates</h3>
+          </header>
+          <p>Social matching with real-time chat, badges, and fluid swipe UI.</p>
+          <a class="more" href="#" aria-label="Open BlazeMates details">Learn more →</a>
+        </article>
 
-    <!-- Project cards -->
-    <section id="projects">
-      <h2>Projects</h2>
-      <div class="grid">
         <article class="card">
-          <h3>BlazeMates</h3>
-          <p>Next-gen social app with real-time chat + gamification.</p>
-          <a class="more" href="#">View repo →</a>
+          <header>
+            <span class="tag">Desktop</span>
+            <h3>Fake Bank</h3>
+          </header>
+          <p>Bank simulator: stocks, interest, leaderboards, and clean GUI.</p>
+          <a class="more" href="#" aria-label="Open Fake Bank details">Learn more →</a>
         </article>
+
         <article class="card">
-          <h3>Fake Bank</h3>
-          <p>Bank simulator with stocks, badges, and a slick GUI.</p>
-          <a class="more" href="#">View repo →</a>
-        </article>
-        <article class="card">
-          <h3>SkySnapz</h3>
-          <p>E-commerce for sky photos (299+ images).</p>
-          <a class="more" href="#">View repo →</a>
+          <header>
+            <span class="tag">Web</span>
+            <h3>SkySnapz</h3>
+          </header>
+          <p>E-commerce for sky photos (299+). Smooth gallery + checkout.</p>
+          <a class="more" href="#" aria-label="Open SkySnapz details">Learn more →</a>
         </article>
       </div>
     </section>
 
     <!-- About -->
-    <section id="about">
+    <section id="about" class="about">
       <h2>About</h2>
       <p>
-        I’m <strong>HawkC13</strong>—I build apps, games, and simulations with a bias for speed and polish.
-        Always chasing first place.
+        I’m <strong>HawkC13</strong>—maker of sleek apps, games, and simulations. I iterate fast,
+        obsess over details, and optimize for results. If it ships and wows, it’s here.
       </p>
     </section>
 
     <!-- Contact -->
-    <section id="contact">
+    <section id="contact" class="contact">
       <h2>Contact</h2>
-      <p>Reach me on GitHub: <a href="https://github.com/dasavage21" target="_blank" rel="noopener">github.com/your-username</a></p>
+      <div class="contact-grid">
+        <a class="contact-card" href="mailto:hello@example.com">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6.5A2.5 2.5 0 0 1 4.5 4h15A2.5 2.5 0 0 1 22 6.5v11A2.5 2.5 0 0 1 19.5 20h-15A2.5 2.5 0 0 1 2 17.5v-11Zm2.3-.2 7.6 5.1 7.6-5.1a1 1 0 0 0-.9-.3H5.2a1 1 0 0 0-.9.3Zm17.2 2.3-8.2 5.5a1 1 0 0 1-1.1 0L4 8.6v8.9a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V8.6Z"/></svg>
+          <span>Email</span>
+        </a>
+        <a class="contact-card" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c5.51 0 10 4.49 10 10s-4.49 10-10 10S2 17.51 2 12 6.49 2 12 2Zm0 3a7 7 0 1 0 .001 14.001A7 7 0 0 0 12 5Zm-1.2 3.5h2.4V11h2.5v2h-2.5v3.5h-2.4V13H8.5v-2h2.3V8.5Z"/></svg>
+          <span>Social</span>
+        </a>
+        <a class="contact-card" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z" fill="none"/><path d="M7 7h10v2H7zm0 4h10v2H7zm0 4h6v2H7z"/></svg>
+          <span>Portfolio</span>
+        </a>
+      </div>
     </section>
   </main>
 
   <footer class="footer">
-    © <span id="y"></span> HawkC — Made with ❤️
+    <p>© <span id="year"></span> HawkC — All rights reserved.</p>
   </footer>
 
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // simple scroll reveal
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(e => e.isIntersecting && e.target.classList.add('in'));
-    }, {threshold: 0.2});
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    // Rotating words in hero
+    const rotator = document.querySelector('.rotate');
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % rotator.children.length;
+      for (let j = 0; j < rotator.children.length; j++) {
+        rotator.children[j].style.transform = `translateY(${(j - i) * 100}%)`;
+        rotator.children[j].style.opacity = j === i ? 1 : 0;
+      }
+    }, 1700);
   </script>
 </body>
 </html>
