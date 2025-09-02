@@ -4,152 +4,170 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="color-scheme" content="dark light" />
-  <title>HawkC — Official</title>
-
+  <title>BlazeMates — Meet, Match, Light Up</title>
+  <meta name="description" content="BlazeMates is the modern way to connect with people who share your vibe. Real-time chat, swipe matching, badges, and verified 21+." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.8em%22 font-size=%2290%22>🦅</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.8em%22 font-size=%2290%22>🔥</text></svg>">
 </head>
 <body>
-  <!-- Background gradient + stars (no libs) -->
-  <div class="backdrop">
-    <canvas id="stars" aria-hidden="true"></canvas>
-    <div class="radial"></div>
-  </div>
+  <div class="bg"></div>
 
   <!-- Topbar -->
   <header class="topbar">
-    <a class="brand" href="#">🦅 HawkC</a>
-    <button class="menu" aria-label="Toggle menu">☰</button>
-    <nav class="navlinks">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a class="chip" href="#contact">Contact</a>
+    <a class="brand" href="#">🔥 BlazeMates</a>
+    <nav class="nav">
+      <a href="#features">Features</a>
+      <a href="#screens">Screenshots</a>
+      <a href="#faq">FAQ</a>
+      <a class="chip" href="#cta">Join Beta</a>
     </nav>
   </header>
 
-  <!-- Hero -->
+  <!-- HERO -->
   <section class="hero">
+    <div class="container split">
+      <div class="hero-copy">
+        <h1>Meet, Match, <span class="grad">Light Up.</span></h1>
+        <p class="lead">
+          The social app for people with the same vibe. Swipe to match, chat in real-time,
+          earn badges, and verify 21+ for a safer community.
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="#cta">Join the Beta</a>
+          <a class="btn ghost" href="#features">See how it works</a>
+        </div>
+        <ul class="highlights">
+          <li>⚡ Real-time chat (typing + read receipts)</li>
+          <li>🏆 Levels & badges (OG Smoker, 420 Matchmaker)</li>
+          <li>🔒 Verified 21+ & report tools</li>
+        </ul>
+      </div>
+
+      <!-- phone mock (pure HTML/CSS) -->
+      <figure class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="pill">Typing…</div>
+          <div class="card">
+            <div class="avatar"></div>
+            <div>
+              <div class="name">Jules, 23 <span class="tag">both</span></div>
+              <div class="sub">“Looking for a chill sesh tonight 🌿”</div>
+            </div>
+          </div>
+          <div class="chat">
+            <div class="bubble me">You around later?</div>
+            <div class="bubble them">Yep! 8pm?</div>
+            <div class="status">Read 7:41 PM</div>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="section">
     <div class="container">
-      <h1 class="title">
-        Building <span class="nowrap">systems&nbsp;that&nbsp;ship.</span>
-      </h1>
-      <p class="subtitle">Fast. Polished. 2025-level design—no filler.</p>
-      <div class="actions">
-        <a class="btn primary" href="#work">See Work</a>
-        <a class="btn ghost" href="#contact">Get in Touch</a>
+      <h2>Why BlazeMates</h2>
+      <div class="grid">
+        <article class="feature">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2l4 7-4 2-4-2 4-7zm0 20c-4.4 0-8-3.6-8-8h2a6 6 0 0 0 12 0h2c0 4.4-3.6 8-8 8z"/></svg>
+          </div>
+          <h3>Swipe Matches</h3>
+          <p>Smart swipe deck with cooldown logic to reduce spam and improve match quality.</p>
+        </article>
+
+        <article class="feature">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6zm3 2h10v2H7V8zm0 4h7v2H7v-2z"/></svg>
+          </div>
+          <h3>Real-time Chat</h3>
+          <p>Typing indicators, read receipts, and instant delivery using a real-time backend.</p>
+        </article>
+
+        <article class="feature">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2l7 4v5c0 5-3 9-7 11-4-2-7-6-7-11V6l7-4zm0 4l-4 2v3c0 3.2 1.9 6.1 4 7.6 2.1-1.5 4-4.4 4-7.6V8l-4-2z"/></svg>
+          </div>
+          <h3>21+ Verification</h3>
+          <p>Optional 21+ badge for extra trust. Tools to report and block keep the vibe safe.</p>
+        </article>
+
+        <article class="feature">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1 5h2v6h-2V7zm1 10a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+          </div>
+          <h3>Badges & Levels</h3>
+          <p>Progress from Blaze Level 1–10. Earn OG Smoker and 420 Matchmaker for milestones.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- Work -->
-  <main class="container">
-    <section id="work" class="work">
-      <h2>Featured Work</h2>
-      <div class="cards">
-        <article class="card">
-          <header>
-            <span class="tag">Mobile</span>
-            <h3>BlazeMates</h3>
-          </header>
-          <p>Social matching with real-time chat, badges, and fluid swipe UI.</p>
-          <a class="more" href="#">Learn more →</a>
-        </article>
-
-        <article class="card">
-          <header>
-            <span class="tag">Desktop</span>
-            <h3>Fake Bank</h3>
-          </header>
-          <p>Bank simulator: stocks, interest, leaderboards, and clean GUI.</p>
-          <a class="more" href="#">Learn more →</a>
-        </article>
-
-        <article class="card">
-          <header>
-            <span class="tag">Web</span>
-            <h3>SkySnapz</h3>
-          </header>
-          <p>E-commerce for sky photos (299+). Smooth gallery + checkout.</p>
-          <a class="more" href="#">Learn more →</a>
-        </article>
+  <!-- SCREENSHOTS -->
+  <section id="screens" class="section">
+    <div class="container">
+      <h2>App Screens</h2>
+      <div class="screens">
+        <!-- Replace these placeholders with real images (png/jpg/webp) later -->
+        <figure class="shot"><div class="shot-img">Swipe</div><figcaption>Swipe Deck</figcaption></figure>
+        <figure class="shot"><div class="shot-img">Chat</div><figcaption>Real-time Chat</figcaption></figure>
+        <figure class="shot"><div class="shot-img">Profile</div><figcaption>Profile & Badges</figcaption></figure>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- About -->
-    <section id="about" class="about">
-      <h2>About</h2>
-      <p>
-        I’m <strong>HawkC13</strong>—maker of sleek apps, games, and simulations. I iterate fast,
-        obsess over details, and optimize for results. If it ships and wows, it’s here.
-      </p>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="contact">
-      <h2>Contact</h2>
-      <div class="contact-grid">
-        <a class="contact-card" href="mailto:hello@example.com">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6.5A2.5 2.5 0 0 1 4.5 4h15A2.5 2.5 0 0 1 22 6.5v11A2.5 2.5 0 0 1 19.5 20h-15A2.5 2.5 0 0 1 2 17.5v-11Zm2.3-.2 7.6 5.1 7.6-5.1a1 1 0 0 0-.9-.3H5.2a1 1 0 0 0-.9.3Zm17.2 2.3-8.2 5.5a1 1 0 0 1-1.1 0L4 8.6v8.9a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V8.6Z"/></svg>
-          <span>Email</span>
-        </a>
-        <a class="contact-card" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c5.51 0 10 4.49 10 10s-4.49 10-10 10S2 17.51 2 12 6.49 2 12 2Zm0 3a7 7 0 1 0 .001 14.001A7 7 0 0 0 12 5Zm-1.2 3.5h2.4V11h2.5v2h-2.5v3.5h-2.4V13H8.5v-2h2.3V8.5Z"/></svg>
-          <span>Social</span>
-        </a>
-        <a class="contact-card" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z" fill="none"/><path d="M7 7h10v2H7zm0 4h10v2H7zm0 4h6v2H7z"/></svg>
-          <span>Portfolio</span>
-        </a>
+  <!-- CTA -->
+  <section id="cta" class="cta">
+    <div class="container cta-inner">
+      <div>
+        <h3>Join the BlazeMates Beta</h3>
+        <p>Be first to try new features and help shape the community.</p>
       </div>
-    </section>
-  </main>
+      <form class="signup" action="https://formspree.io/f/your-id" method="POST">
+        <input type="email" name="email" required placeholder="your@email.com" />
+        <button class="btn primary" type="submit">Request Invite</button>
+      </form>
+    </div>
+  </section>
 
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="container">
+      <h2>FAQ</h2>
+      <details>
+        <summary>Is BlazeMates only for 21+?</summary>
+        <p>Core features are general-audience, but the verified badge and certain groups are 21+.</p>
+      </details>
+      <details>
+        <summary>What platforms are supported?</summary>
+        <p>iOS and Android are planned. Early web preview coming during beta.</p>
+      </details>
+      <details>
+        <summary>How do badges/levels work?</summary>
+        <p>Levels are based on matches, chats, and session activity. Badges unlock at milestones.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="footer">
-    <p>© <span id="year"></span> HawkC — All rights reserved.</p>
+    <div class="container foot">
+      <span>© <span id="y"></span> BlazeMates</span>
+      <nav class="foot-links">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#cta">Join Beta</a>
+      </nav>
+    </div>
   </footer>
 
   <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Mobile menu
-    const menuBtn = document.querySelector('.menu');
-    const nav = document.querySelector('.navlinks');
-    menuBtn.addEventListener('click', () => nav.classList.toggle('open'));
-
-    // Starfield (tiny + efficient)
-    const c = document.getElementById('stars');
-    const ctx = c.getContext('2d', { alpha: true });
-    let w, h, stars;
-    function resize(){
-      w = c.width = innerWidth;
-      h = c.height = innerHeight;
-      stars = Array.from({length: Math.min(220, Math.floor(w*h/9000))}, () => ({
-        x: Math.random()*w,
-        y: Math.random()*h,
-        z: Math.random()*0.8 + 0.2,
-        s: Math.random()*1.4 + 0.3,
-        vx: (Math.random()-0.5)*0.1,
-        vy: (Math.random()-0.5)*0.1,
-      }));
-    }
-    function tick(){
-      ctx.clearRect(0,0,w,h);
-      for (const p of stars){
-        p.x += p.vx * p.z; p.y += p.vy * p.z;
-        if (p.x<0) p.x=w; if (p.x>w) p.x=0; if (p.y<0) p.y=h; if (p.y>h) p.y=0;
-        ctx.globalAlpha = 0.35 + p.z*0.65;
-        ctx.fillStyle = '#ffffff';
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.s*p.z, 0, Math.PI*2); ctx.fill();
-      }
-      requestAnimationFrame(tick);
-    }
-    addEventListener('resize', resize);
-    resize(); tick();
+    document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
