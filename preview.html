@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BlazeMates — Web Preview</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg"></div>
+  <header class="topbar">
+    <a class="brand" href="index.html">🔥 BlazeMates</a>
+    <nav class="nav">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#screens">Screenshots</a>
+      <a href="index.html#faq">FAQ</a>
+      <a class="chip" href="index.html#cta">Join Beta</a>
+    </nav>
+  </header>
+
+  <main class="container" style="margin:84px auto">
+    <h1>Early Web Preview</h1>
+    <p class="lead">Launching during beta. This lightweight browser demo will live here.</p>
+    <div class="cta" style="margin-top:16px">
+      <span class="btn primary disabled">Coming soon</span>
+      <a class="btn ghost" href="index.html#cta">Get Beta Invite</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container foot">
+      <span>© <span id="y"></span> BlazeMates</span>
+      <nav class="foot-links"><a href="index.html#cta">Join Beta</a></nav>
+    </div>
+  </footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
