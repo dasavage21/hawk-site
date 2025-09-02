@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HawkC — Home</title>
+  <meta name="description" content="My GitHub Pages site" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦅</text></svg>">
+</head>
+<body>
+  <header class="container header">
+    <nav class="nav">
+      <a class="logo" href="./">HawkC</a>
+      <div class="links">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </nav>
+    <section class="hero">
+      <h1>Build. Ship. Win.</h1>
+      <p>Clean, fast, and mobile-first. This site is powered by GitHub Pages.</p>
+      <div class="cta">
+        <a class="btn" href="#projects">See Projects</a>
+        <a class="btn ghost" href="#contact">Contact</a>
+      </div>
+    </section>
+  </header>
+
+  <main class="container">
+    <section id="projects" class="grid">
+      <article class="card">
+        <h3>BlazeMates</h3>
+        <p>React Native + Supabase real-time chat, badges, and swipe UI.</p>
+        <a class="more" href="https://github.com/your-username/blazemates">View repo →</a>
+      </article>
+      <article class="card">
+        <h3>Fake Bank</h3>
+        <p>GUI bank sim with stocks, interest, and leaderboard.</p>
+        <a class="more" href="https://github.com/your-username/fake-bank">View repo →</a>
+      </article>
+      <article class="card">
+        <h3>SkySnapz</h3>
+        <p>Photo shop for skies. 299+ images, e-commerce ready.</p>
+        <a class="more" href="https://github.com/your-username/skysnapz">View repo →</a>
+      </article>
+    </section>
+
+    <section id="about" class="about">
+      <h2>About</h2>
+      <p>Hi, I’m HawkC13. I build sleek apps, live sites, and fun sims. Follow along as I ship.</p>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+      <p>DM me on GitHub or open an issue in any repo.</p>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <p>© <span id="y"></span> HawkC. Built with GitHub Pages.</p>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
