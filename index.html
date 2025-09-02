@@ -9,24 +9,25 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.8em%22 font-size=%2290%22>🦅</text></svg>">
 </head>
 <body>
-  <!-- Background -->
+  <!-- Background gradient + stars (no libs) -->
   <div class="backdrop">
-    <div class="blob a"></div>
-    <div class="blob b"></div>
-    <div class="gridlines"></div>
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <div class="radial"></div>
   </div>
 
-  <!-- Top Bar -->
+  <!-- Topbar -->
   <header class="topbar">
     <a class="brand" href="#">🦅 HawkC</a>
+    <button class="menu" aria-label="Toggle menu">☰</button>
     <nav class="navlinks">
       <a href="#work">Work</a>
       <a href="#about">About</a>
-      <a href="#contact" class="chip">Contact</a>
+      <a class="chip" href="#contact">Contact</a>
     </nav>
   </header>
 
@@ -34,10 +35,7 @@
   <section class="hero">
     <div class="container">
       <h1 class="title">
-        Building <span class="rotate" aria-live="polite">
-          <b>apps</b><b>games</b><b>experiences</b><b>systems</b>
-        </span>
-        that ship.
+        Building <span class="nowrap">systems&nbsp;that&nbsp;ship.</span>
       </h1>
       <p class="subtitle">Fast. Polished. 2025-level design—no filler.</p>
       <div class="actions">
@@ -58,7 +56,7 @@
             <h3>BlazeMates</h3>
           </header>
           <p>Social matching with real-time chat, badges, and fluid swipe UI.</p>
-          <a class="more" href="#" aria-label="Open BlazeMates details">Learn more →</a>
+          <a class="more" href="#">Learn more →</a>
         </article>
 
         <article class="card">
@@ -67,7 +65,7 @@
             <h3>Fake Bank</h3>
           </header>
           <p>Bank simulator: stocks, interest, leaderboards, and clean GUI.</p>
-          <a class="more" href="#" aria-label="Open Fake Bank details">Learn more →</a>
+          <a class="more" href="#">Learn more →</a>
         </article>
 
         <article class="card">
@@ -76,7 +74,7 @@
             <h3>SkySnapz</h3>
           </header>
           <p>E-commerce for sky photos (299+). Smooth gallery + checkout.</p>
-          <a class="more" href="#" aria-label="Open SkySnapz details">Learn more →</a>
+          <a class="more" href="#">Learn more →</a>
         </article>
       </div>
     </section>
@@ -118,16 +116,40 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Rotating words in hero
-    const rotator = document.querySelector('.rotate');
-    let i = 0;
-    setInterval(() => {
-      i = (i + 1) % rotator.children.length;
-      for (let j = 0; j < rotator.children.length; j++) {
-        rotator.children[j].style.transform = `translateY(${(j - i) * 100}%)`;
-        rotator.children[j].style.opacity = j === i ? 1 : 0;
+    // Mobile menu
+    const menuBtn = document.querySelector('.menu');
+    const nav = document.querySelector('.navlinks');
+    menuBtn.addEventListener('click', () => nav.classList.toggle('open'));
+
+    // Starfield (tiny + efficient)
+    const c = document.getElementById('stars');
+    const ctx = c.getContext('2d', { alpha: true });
+    let w, h, stars;
+    function resize(){
+      w = c.width = innerWidth;
+      h = c.height = innerHeight;
+      stars = Array.from({length: Math.min(220, Math.floor(w*h/9000))}, () => ({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        z: Math.random()*0.8 + 0.2,
+        s: Math.random()*1.4 + 0.3,
+        vx: (Math.random()-0.5)*0.1,
+        vy: (Math.random()-0.5)*0.1,
+      }));
+    }
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      for (const p of stars){
+        p.x += p.vx * p.z; p.y += p.vy * p.z;
+        if (p.x<0) p.x=w; if (p.x>w) p.x=0; if (p.y<0) p.y=h; if (p.y>h) p.y=0;
+        ctx.globalAlpha = 0.35 + p.z*0.65;
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.s*p.z, 0, Math.PI*2); ctx.fill();
       }
-    }, 1700);
+      requestAnimationFrame(tick);
+    }
+    addEventListener('resize', resize);
+    resize(); tick();
   </script>
 </body>
 </html>
