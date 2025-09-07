@@ -2,21 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>BlazeMates – Safety Standards</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BlazeMates — Child Safety Standards</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="dark">
-  <main class="container" style="padding:40px 0 24px">
-    <h1>Safety Standards & CSAE Policy</h1>
-    <p>BlazeMates has zero tolerance for child sexual abuse and exploitation (CSAE). We:</p>
-    <ul>
-      <li>Prohibit any sexual content involving minors and promptly remove and report violations.</li>
-      <li>Provide in-app tools to block & report users, and respond quickly to abuse reports.</li>
-      <li>Cooperate with law enforcement where appropriate.</li>
-      <li>Restrict the app to adults; age gate and enforcement included.</li>
+  <div class="bg"></div>
+  <header class="site-header container">
+    <a class="brand" href="index.html">
+      <img class="brand__logo" src="Profile.png" alt="" />
+      <span class="brand__text">BlazeMates</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#screens">Screens</a>
+      <a class="btn" href="index.html#cta">Get the App</a>
+    </nav>
+  </header>
+
+  <main class="container section">
+    <h1>Child Safety Standards</h1>
+    <p class="lead">BlazeMates prohibits any content that exploits or endangers children. We actively detect, report, and remove Child Sexual Abuse and Exploitation (CSAE) content.</p>
+
+    <h2>Our commitments</h2>
+    <ul class="muted">
+      <li>No tolerance for CSAE content or behavior; accounts are immediately terminated.</li>
+      <li>Photo and chat reporting tools available in-app; reports are reviewed 24/7.</li>
+      <li>We preserve evidence and report suspected CSAE to the appropriate authorities and NCMEC where applicable.</li>
+      <li>Automatic scanning of uploads against known CSAE hashes; suspicious activity is blocked and flagged.</li>
+      <li>Under-age use is prohibited; violators are removed and devices may be blocked.</li>
     </ul>
-    <p>Contact: <a href="mailto:support@yourdomain.com">support@yourdomain.com</a></p>
+
+    <h2>Contact</h2>
+    <p class="muted">To report a concern, email <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>.</p>
   </main>
+
+  <footer class="site-footer container">
+    <span class="muted">© <span id="y"></span> BlazeMates</span>
+    <nav class="foot-links">
+      <a href="index.html#cta">Get the App</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </nav>
+  </footer>
+
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
