@@ -3,98 +3,110 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BlazeMates — Find your 420-friendly people</title>
+  <title>BlazeMates — 420-friendly dating</title>
+
+  <!-- Social / SEO -->
+  <meta name="description" content="Swipe, match, and chat with nearby 420-friendly people. Privacy-first and consent-focused." />
+  <meta property="og:title" content="BlazeMates" />
+  <meta property="og:description" content="Swipe, match, and chat with nearby 420-friendly people." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="img/logo.png" />
+
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="Profile.png" />
 </head>
 <body class="dark">
   <div class="bg"></div>
 
   <header class="site-header container">
-    <a class="brand" href="index.html">
-      <img class="brand__logo" src="Profile.png" alt="BlazeMates logo" />
+    <a class="brand" href="/">
+      <img class="brand__logo" src="img/logo.png" alt="BlazeMates logo" />
       <span class="brand__text">BlazeMates</span>
     </a>
     <nav class="nav">
       <a href="#features">Features</a>
       <a href="#screens">Screens</a>
       <a href="preview.html">Web Preview</a>
-      <a class="btn btn--ghost" href="csae-standards.html" title="Child safety standards">Safety</a>
       <a class="btn" href="#cta">Get the App</a>
     </nav>
   </header>
 
-  <main class="container">
+  <main>
     <!-- Hero -->
-    <section class="hero">
+    <section class="container hero">
       <div class="hero__copy">
-        <h1 class="title">Find your <span class="grad">420-friendly</span> people 🌿</h1>
-        <p class="lead">Swipe, match, and chat with nearby BlazeMates. Built with consent, privacy, and safety at the core.</p>
+        <h1 class="title">Find your 420-friendly people <span class="leaf">🌿</span></h1>
+        <p class="lead">
+          Swipe, match, and chat with nearby BlazeMates. Built with privacy, consent, and safety at the core.
+        </p>
         <div class="cta-row" id="cta">
           <a class="btn" href="https://play.google.com/store/apps/details?id=com.hawkc13.blazemates">Get it on Google Play</a>
-          <a class="btn btn--ghost" href="preview.html">Early Web Preview</a>
+          <a class="btn btn--ghost" href="preview.html">Try Web Preview</a>
         </div>
-        <p class="tiny muted" style="margin-top:8px">Desktop &amp; mobile browsers supported (beta). Limited features; progress may reset.</p>
+        <p class="tiny muted" style="margin-top:8px">iOS TestFlight coming soon.</p>
       </div>
 
-      <div class="hero__art">
-        <!-- simple phone mock with your Swipe.png -->
-        <img src="Swipe.png" alt="BlazeMates swipe screen" />
-      </div>
+      <figure class="hero__art">
+        <img src="img/screen-swipe.png" alt="App swipe screen" />
+      </figure>
     </section>
 
     <!-- Features -->
-    <section id="features" class="features">
-      <h2>Why you’ll like it</h2>
+    <section id="features" class="container features">
+      <h2>Why BlazeMates</h2>
       <div class="grid">
         <article class="card">
           <div class="card__icon">🔥</div>
-          <h3>Swipe that vibes</h3>
-          <p class="muted">Fast, fun, and tuned for 420 culture—set your style and strain preferences.</p>
-        </article>
-        <article class="card">
-          <div class="card__icon">💬</div>
-          <h3>Real-time chat</h3>
-          <p class="muted">Typing indicators, read receipts, and a chill dark theme out of the box.</p>
+          <h3>Real Matches</h3>
+          <p>Swipe with intention; match with people who share your vibe.</p>
         </article>
         <article class="card">
           <div class="card__icon">🔒</div>
-          <h3>Privacy-first</h3>
-          <p class="muted">You control your data. Delete your account and associated content anytime.</p>
+          <h3>Privacy-First</h3>
+          <p>Clear controls, transparent policies, and no shady data resale.</p>
         </article>
         <article class="card">
-          <div class="card__icon">🛡️</div>
-          <h3>Safety standards</h3>
-          <p class="muted">We publish standards against CSAE and remove prohibited content. <a href="csae-standards.html">Learn more</a>.</p>
+          <div class="card__icon">🧭</div>
+          <h3>Safety Standards</h3>
+          <p>Published CSAE standards and in-app reporting tools.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon">🏆</div>
+          <h3>Badges</h3>
+          <p>Earn “OG Smoker” and “Verified 420 Matchmaker” for good vibes.</p>
         </article>
       </div>
     </section>
 
     <!-- Screens -->
-    <section id="screens" class="screens">
+    <section id="screens" class="container screens">
       <h2>App Screens</h2>
       <div class="screens__row">
         <figure class="shot">
-          <img src="Swipe.png" alt="Swipe screen" />
+          <img src="img/screen-swipe.png" alt="Swipe screen" />
           <figcaption>Swipe</figcaption>
         </figure>
         <figure class="shot">
-          <img src="chat.png" alt="Chat screen" />
+          <img src="img/screen-chat.png" alt="Chat screen" />
           <figcaption>Chat</figcaption>
         </figure>
         <figure class="shot">
-          <img src="Profile.png" alt="Profile screen" />
+          <img src="img/logo.png" alt="Profile avatar" />
           <figcaption>Profile</figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="features">
-      <h2>Get BlazeMates</h2>
-      <div class="cta-row">
-        <a class="btn" href="https://play.google.com/store/apps/details?id=com.hawkc13.blazemates">Get it on Google Play</a>
-        <a class="btn btn--ghost" href="preview.html">Try Web Preview</a>
+    <!-- Secondary CTA -->
+    <section class="container cta-block">
+      <div class="cta-inner">
+        <div>
+          <h3>Ready to meet your people?</h3>
+          <p class="muted">Join the beta and help shape BlazeMates.</p>
+        </div>
+        <div class="signup">
+          <a class="btn" href="https://play.google.com/store/apps/details?id=com.hawkc13.blazemates">Get the App</a>
+          <a class="btn btn--ghost" href="preview.html">Try Web Preview</a>
+        </div>
       </div>
     </section>
   </main>
@@ -102,8 +114,8 @@
   <footer class="site-footer container">
     <span class="muted">© <span id="y"></span> BlazeMates</span>
     <nav class="foot-links">
-      <a href="csae-standards.html">Safety Standards</a>
       <a href="privacy.html">Privacy</a>
+      <a href="csae-standards.html">Safety Standards</a>
       <a href="mailto:support@yourdomain.com">Contact</a>
     </nav>
   </footer>
