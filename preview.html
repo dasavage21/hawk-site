@@ -2,118 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BlazeMates — Web Preview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BlazeMates – Web Preview</title>
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    .preview-app {
-      max-width: 360px;
-      margin: 40px auto;
-      background: #1e1e1e;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 22px;
-      padding: 16px;
-      color: #fff;
-      font-family: system-ui, sans-serif;
-      box-shadow: 0 20px 50px rgba(0,0,0,.4);
-    }
-    .card {
-      background: #2a2a2a;
-      border-radius: 16px;
-      padding: 16px;
-      text-align: center;
-    }
-    .card img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 10px;
-    }
-    .name { font-weight: 700; font-size: 18px; }
-    .bio { color: #bbb; font-size: 14px; margin: 6px 0 12px; }
-    .btn-row { display:flex; justify-content:space-around; margin-top:10px; }
-    .swipe-btn {
-      background: #00FF7F; color:#0a0a0a;
-      border:none; padding:12px 18px;
-      border-radius: 50%; font-size:20px;
-      cursor:pointer;
-      box-shadow:0 0 16px rgba(0,255,127,.3);
-      transition: transform .15s;
-    }
-    .swipe-btn:hover { transform: scale(1.1); }
-    .chat-box {
-      margin-top: 18px;
-      background:#121212;
-      padding:10px;
-      border-radius:12px;
-      max-height:120px; overflow:auto;
-    }
-    .bubble { background:#2e2e2e; border-radius:12px; padding:8px 12px; margin:6px 0; text-align:left; }
-    .bubble.me { background:#00FF7F; color:#0a0a0a; margin-left:auto; text-align:right; }
-  </style>
 </head>
-<body class="dark">
+<body class="dark compact">
   <div class="bg"></div>
 
-  <header class="site-header container">
-    <a class="brand" href="index.html">
-      <img class="brand__logo" src="Profile.png" alt="logo" />
-      <span class="brand__text">BlazeMates</span>
-    </a>
+  <header class="topbar">
+    <a class="brand" href="index.html">🔥 BlazeMates</a>
     <nav class="nav">
       <a href="index.html#features">Features</a>
-      <a href="index.html#screens">Screens</a>
-      <a class="btn" href="index.html#cta">Get the App</a>
+      <a href="index.html#screens">Screenshots</a>
+      <a href="index.html#faq">FAQ</a>
+      <a class="chip alt" href="index.html#cta">Join Beta</a>
     </nav>
   </header>
 
-  <main class="container section">
-    <h1>Early Web Preview</h1>
-    <p class="lead">Swipe through profiles and test chat—no install needed. Demo only, data resets.</p>
+  <main class="container section" style="margin:84px auto">
+  <h1>Early Web Preview</h1>
+  <p class="lead">
+    Try BlazeMates in your browser during beta. Explore swipe, chat, and badges with limited test data.
+  </p>
+  <div class="cta" style="margin-top:16px">
+    <span class="btn primary disabled">Coming soon</span>
+    <a class="btn ghost" href="index.html#cta">Get Beta Invite</a>
+  </div>
+</main>
 
-    <div class="preview-app">
-      <div class="card" id="card">
-        <img id="profile-pic" src="Swipe.png" alt="Profile demo" />
-        <div class="name" id="profile-name">Alex, 23</div>
-        <div class="bio" id="profile-bio">"Just wanna chill and vibe 🌿"</div>
-        <div class="btn-row">
-          <button class="swipe-btn" onclick="swipe('no')">❌</button>
-          <button class="swipe-btn" onclick="swipe('yes')">✔️</button>
-        </div>
-      </div>
 
-      <div class="chat-box" id="chat">
-        <div class="bubble">Hey 👋</div>
-      </div>
+  <footer class="footer">
+    <div class="container foot">
+      <span>© <span id="y"></span> BlazeMates</span>
+      <nav class="foot-links"><a href="index.html#cta">Join Beta</a></nav>
     </div>
-  </main>
-
-  <footer class="site-footer container">
-    <span class="muted">© <span id="y"></span> BlazeMates</span>
-    <nav class="foot-links">
-      <a href="csae-standards.html">Safety Standards</a>
-      <a href="index.html#cta">Get the App</a>
-    </nav>
   </footer>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    const profiles = [
-      {pic:"Swipe.png", name:"Alex, 23", bio:"Just wanna chill and vibe 🌿"},
-      {pic:"chat.png", name:"Roy, 27", bio:"420-friendly, into music & hiking 🎶"},
-      {pic:"Profile.png", name:"Hannah, 25", bio:"Looking for good convos & good strains ✌️"}
-    ];
-    let index=0;
-    function swipe(dir){
-      const chat=document.getElementById('chat');
-      if(dir==='yes'){ chat.innerHTML += '<div class="bubble me">✔ Liked!</div>'; }
-      else{ chat.innerHTML += '<div class="bubble me">❌ Skipped</div>'; }
-      index=(index+1)%profiles.length;
-      const p=profiles[index];
-      document.getElementById('profile-pic').src=p.pic;
-      document.getElementById('profile-name').textContent=p.name;
-      document.getElementById('profile-bio').textContent=p.bio;
-    }
-  </script>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
