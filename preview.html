@@ -1,37 +1,33 @@
-<body>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BlazeMates – Web Preview</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dark compact">
   <div class="bg"></div>
+
   <header class="topbar">
     <a class="brand" href="index.html">🔥 BlazeMates</a>
     <nav class="nav">
       <a href="index.html#features">Features</a>
       <a href="index.html#screens">Screenshots</a>
       <a href="index.html#faq">FAQ</a>
-      <a class="chip" href="index.html#cta">Join Beta</a>
+      <a class="chip alt" href="index.html#cta">Join Beta</a>
     </nav>
   </header>
 
-  <!-- HERE is the updated preview block -->
-  <section class="container section preview">
-    <div class="preview-wrap">
-      <figure class="preview-mock">
-        <div class="mock-bar">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <span class="url">preview (local demo)</span>
-        </div>
-        <div class="mock-screen">
-          Web Preview Placeholder
-        </div>
-      </figure>
-
-      <div>
-        <h2>Early Web Preview</h2>
-        <p class="note">Try BlazeMates in your browser during beta. Explore swipe, chat, and badges with limited test data.</p>
-        <a class="btn ghost" href="index.html#cta">Get Beta Invite</a>
-      </div>
+  <main class="container section" style="margin:84px auto">
+    <h1>Early Web Preview</h1>
+    <p class="lead">
+      Try BlazeMates in your browser during beta. Explore swipe, chat, and badges with limited test data.
+    </p>
+    <div class="cta" style="margin-top:16px">
+      <a class="btn ghost" href="index.html#cta">Get Beta Invite</a>
     </div>
-  </section>
+  </main>
 
   <footer class="footer">
     <div class="container foot">
@@ -39,5 +35,7 @@
       <nav class="foot-links"><a href="index.html#cta">Join Beta</a></nav>
     </div>
   </footer>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
+</html>
