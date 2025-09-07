@@ -1,11 +1,3 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BlazeMates — Web Preview</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
 <body>
   <div class="bg"></div>
   <header class="topbar">
@@ -18,16 +10,28 @@
     </nav>
   </header>
 
- <main class="container section preview">
-  <h1>Early Web Preview</h1>
-  <p class="lead">Launching during beta. This lightweight browser demo will live here.</p>
+  <!-- HERE is the updated preview block -->
+  <section class="container section preview">
+    <div class="preview-wrap">
+      <figure class="preview-mock">
+        <div class="mock-bar">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <span class="url">preview (local demo)</span>
+        </div>
+        <div class="mock-screen">
+          Web Preview Placeholder
+        </div>
+      </figure>
 
-  <div class="cta">
-    <span class="btn primary disabled">Coming soon</span>
-    <a class="btn ghost" href="index.html#cta">Get Beta Invite</a>
-  </div>
-</main>
-
+      <div>
+        <h2>Early Web Preview</h2>
+        <p class="note">Try BlazeMates in your browser during beta. Explore swipe, chat, and badges with limited test data.</p>
+        <a class="btn ghost" href="index.html#cta">Get Beta Invite</a>
+      </div>
+    </div>
+  </section>
 
   <footer class="footer">
     <div class="container foot">
@@ -37,4 +41,3 @@
   </footer>
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
-</html>
