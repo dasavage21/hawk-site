@@ -2,211 +2,128 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="color-scheme" content="dark light" />
-  <title>BlazeMates — Meet, Match, Light Up</title>
-  <meta name="description" content="BlazeMates is the modern way to connect with people who share your vibe. Real-time chat, swipe matching, badges, and verified 21+." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <title>BlazeMates – 420 Friends & Vibes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#121212" />
+  <meta name="description" content="BlazeMates helps you find 420-friendly friends and vibes. Swipe, match, and chat—built with privacy and safety in mind." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="BlazeMates – 420 Friends & Vibes" />
+  <meta property="og:description" content="Swipe, match, and chat with 420-friendly people." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="Profile.png" />
+  <link rel="icon" href="Profile.png" />
+  <link rel="preload" href="styles.css" as="style" />
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.8em%22 font-size=%2290%22>🔥</text></svg>">
+  <meta name="robots" content="index,follow" />
 </head>
-<body>
-  <div class="bg"></div>
-
-  <!-- Topbar -->
-  <header class="topbar">
-    <a class="brand" href="#">🔥 BlazeMates</a>
+<body class="dark">
+  <header class="site-header container">
+    <a class="brand" href="/">
+      <img class="brand__logo" src="Profile.png" alt="" />
+      <span class="brand__text">BlazeMates</span>
+    </a>
     <nav class="nav">
       <a href="#features">Features</a>
-      <a href="#screens">Screenshots</a>
-      <a href="#faq">FAQ</a>
-      <a class="chip alt" href="#preview">Web Preview</a>
-      <a class="chip" href="#cta">Join Beta</a>
+      <a href="#screens">Screens</a>
+      <a href="preview.html">Web Preview</a>
+      <a href="#download" class="btn btn--ghost">Get the App</a>
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container split">
-      <div class="hero-copy">
-        <h1>Meet, Match, <span class="grad">Light Up.</span></h1>
+  <main>
+    <!-- Hero -->
+    <section class="hero container">
+      <div class="hero__copy">
+        <h1>Find your 420-friendly people 🌿</h1>
         <p class="lead">
-          The social app for people with the same vibe. Swipe to match, chat in real-time,
-          earn badges, and verify 21+ for a safer community.
+          Swipe, match, and chat with nearby BlazeMates. Built with privacy, consent, and safety at the core.
         </p>
-        <div class="cta">
-          <a class="btn primary" href="#cta">Join the Beta</a>
-          <a class="btn ghost" href="#features">See how it works</a>
+        <div class="cta-row" id="download">
+          <!-- Replace these hrefs later with your real store links -->
+          <a class="btn" href="https://play.google.com/" target="_blank" rel="noopener">Get it on Google Play</a>
+          <a class="btn btn--ghost" href="https://testflight.apple.com/" target="_blank" rel="noopener">TestFlight (beta)</a>
         </div>
-        <ul class="highlights">
-          <li>⚡ Real-time chat (typing + read receipts)</li>
-          <li>🏆 Levels & badges (OG Smoker, 420 Matchmaker)</li>
-          <li>🔒 Verified 21+ & report tools</li>
-        </ul>
+        <p class="tiny muted">Don’t see your platform? Try our <a href="preview.html">Early Web Preview</a>.</p>
       </div>
-
-      <!-- phone mock (pure HTML/CSS) -->
-      <figure class="phone">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <div class="pill">Typing…</div>
-          <div class="card">
-            <div class="avatar"></div>
-            <div>
-              <div class="name">Jules, 23 <span class="tag">both</span></div>
-              <div class="sub">“Looking for a chill sesh tonight 🌿”</div>
-            </div>
-          </div>
-          <div class="chat">
-            <div class="bubble me">You around later?</div>
-            <div class="bubble them">Yep! 8pm?</div>
-            <div class="status">Read 7:41 PM</div>
-          </div>
-        </div>
-      </figure>
-    </div>
-  </section>
-
-  <!-- PREVIEW -->
-  <section id="preview" class="section preview">
-    <div class="container preview-wrap">
-      <div class="preview-copy">
-        <div class="badge">NEW</div>
-        <h2>Early Web Preview</h2>
-        <p class="lead">
-          Try BlazeMates in your browser during beta. No install required—explore swipe, chat,
-          and badges with limited test data.
-        </p>
-        <div class="cta">
-          <!-- Use local page to avoid DNS issues -->
-          <a class="btn primary" href="preview.html">Launch Preview</a>
-          <a class="btn ghost" href="#cta">Get Beta Invite</a>
-        </div>
-        <p class="note">Desktop & mobile browsers supported. Limited features; progress may reset.</p>
+      <div class="hero__art">
+        <img src="Swipe.png" alt="Swipe screen mockup" />
       </div>
+    </section>
 
-      <!-- Simple browser mock (replace with a real screenshot later) -->
-      <figure class="preview-mock">
-        <div class="mock-bar">
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <div class="url">preview (local demo)</div>
-        </div>
-        <div class="mock-screen">Web Preview Placeholder</div>
-        <figcaption>Early Web Preview UI (placeholder)</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section id="features" class="section">
-    <div class="container">
-      <h2>Why BlazeMates</h2>
+    <!-- Features -->
+    <section id="features" class="features container">
+      <h2>Why BlazeMates?</h2>
       <div class="grid">
-        <article class="feature">
-          <div class="icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2l4 7-4 2-4-2 4-7zm0 20c-4.4 0-8-3.6-8-8h2a6 6 0 0 0 12 0h2c0 4.4-3.6 8-8 8z"/></svg>
-          </div>
-          <h3>Swipe Matches</h3>
-          <p>Smart swipe deck with cooldown logic to reduce spam and improve match quality.</p>
+        <article class="card">
+          <div class="card__icon">🔥</div>
+          <h3>Chill Swiping</h3>
+          <p>Lightweight, fast swiping with preference tags for “smoke”, “hookup”, or “both”.</p>
         </article>
-
-        <article class="feature">
-          <div class="icon">
-            <svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6zm3 2h10v2H7V8zm0 4h7v2H7v-2z"/></svg>
-          </div>
-          <h3>Real-time Chat</h3>
-          <p>Typing indicators, read receipts, and instant delivery using a real-time backend.</p>
+        <article class="card">
+          <div class="card__icon">🔒</div>
+          <h3>Privacy-First</h3>
+          <p>No creepy tracking. You control your profile. Delete data anytime from Settings.</p>
         </article>
-
-        <article class="feature">
-          <div class="icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2l7 4v5c0 5-3 9-7 11-4-2-7-6-7-11V6l7-4zm0 4l-4 2v3c0 3.2 1.9 6.1 4 7.6 2.1-1.5 4-4.4 4-7.6V8l-4-2z"/></svg>
-          </div>
-          <h3>21+ Verification</h3>
-          <p>Optional 21+ badge for extra trust. Tools to report and block keep the vibe safe.</p>
+        <article class="card">
+          <div class="card__icon">💬</div>
+          <h3>Real-Time Chat</h3>
+          <p>Message matches instantly with read receipts and typing indicators.</p>
         </article>
-
-        <article class="feature">
-          <div class="icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1 5h2v6h-2V7zm1 10a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
-          </div>
-          <h3>Badges & Levels</h3>
-          <p>Progress from Blaze Level 1–10. Earn OG Smoker and 420 Matchmaker for milestones.</p>
+        <article class="card">
+          <div class="card__icon">🛡️</div>
+          <h3>Safety Standards</h3>
+          <p>Clear policies against abuse and CSAE. See our <a href="csae-standards.html">published standards</a>.</p>
         </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- SCREENSHOTS -->
-  <section id="screens" class="section">
-    <div class="container">
-      <h2>App Screens</h2>
-      <div class="screens">
+    <!-- Screens -->
+    <section id="screens" class="screens container">
+      <h2>Take a Peek</h2>
+      <div class="screens__row">
         <figure class="shot">
-          <img class="shot-img" src="Swipe.png" alt="Swipe Deck" />
-          <figcaption>Swipe Deck</figcaption>
+          <img src="Swipe.png" alt="Swipe UI" />
+          <figcaption>Swipe</figcaption>
         </figure>
         <figure class="shot">
-          <img class="shot-img" src="chat.png" alt="Chat screen" />
-          <figcaption>Real-time Chat</figcaption>
+          <img src="chat.png" alt="Chat UI" />
+          <figcaption>Chat</figcaption>
         </figure>
         <figure class="shot">
-          <img class="shot-img" src="Profile.png" alt="Profile" />
-          <figcaption>Profile & Badges</figcaption>
+          <img src="Profile.png" alt="Profile UI" />
+          <figcaption>Profile</figcaption>
         </figure>
       </div>
-    </div>
-  </section>
+      <p class="tiny muted">Screens are illustrative; the app evolves fast.</p>
+    </section>
 
-  <!-- CTA -->
-  <section id="cta" class="cta">
-    <div class="container cta-inner">
-      <div>
-        <h3>Join the BlazeMates Beta</h3>
-        <p>Be first to try new features and help shape the community.</p>
-      </div>
-      <form class="signup" action="https://formspree.io/f/your-id" method="POST">
-        <input type="email" name="email" required placeholder="your@email.com" />
-        <button class="btn primary" type="submit">Request Invite</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="section">
-    <div class="container">
+    <!-- FAQ -->
+    <section class="faq container">
       <h2>FAQ</h2>
       <details>
-        <summary>Is BlazeMates only for 21+?</summary>
-        <p>Core features are general-audience, but the verified badge and certain groups are 21+.</p>
+        <summary>Is BlazeMates free?</summary>
+        <p>Yes. Optional premium perks may arrive later, but core features are free.</p>
       </details>
       <details>
-        <summary>What platforms are supported?</summary>
-        <p>iOS and Android are planned. Early web preview coming during beta.</p>
+        <summary>Is my data safe?</summary>
+        <p>We store the minimum needed, let you delete anytime, and never sell personal data. Read our <a href="blazemates-privacy.html">Privacy Policy</a>.</p>
       </details>
       <details>
-        <summary>How do badges/levels work?</summary>
-        <p>Levels are based on matches, chats, and session activity. Badges unlock at milestones.</p>
+        <summary>Who can use BlazeMates?</summary>
+        <p>Adults only. You must be 21+ where required by local law.</p>
       </details>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container foot">
-      <span>© <span id="y"></span> BlazeMates</span>
-      <nav class="foot-links">
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="#cta">Join Beta</a>
-      </nav>
+  <footer class="site-footer container">
+    <div class="footer__left">
+      <strong>BlazeMates</strong> &middot; © 2025 Benjamin Hawk
+    </div>
+    <div class="footer__right">
+      <a href="blazemates-privacy.html">Privacy</a>
+      <a href="csae-standards.html">Safety Standards</a>
+      <a href="preview.html">Web Preview</a>
     </div>
   </footer>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
