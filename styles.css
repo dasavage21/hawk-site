@@ -53,11 +53,7 @@ body.dark{background:var(--bg);color:var(--text);font:16px/1.45 ui-sans-serif,sy
 .site-footer{display:flex;gap:12px;justify-content:space-between;align-items:center;padding:26px 0;border-top:1px solid #222;margin-top:28px}
 .site-footer a{color:var(--muted);text-decoration:none}
 .site-footer a:hover{color:#cfd4d8}
-/* Alt chip color for nav */
-.chip.alt{background:linear-gradient(90deg,var(--accent2),var(--accent1)); color:#081120}
 
-/* Disabled CTA state (use when preview not live) */
-.btn.disabled{opacity:.55; pointer-events:none; cursor:not-allowed}
 /* Responsive */
 @media (max-width:900px){
   .hero{grid-template-columns:1fr;align-items:center}
