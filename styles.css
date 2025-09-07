@@ -65,7 +65,11 @@ body.dark{background:var(--bg);color:var(--text);font:16px/1.45 ui-sans-serif,sy
   .grid{grid-template-columns:1fr}
   .nav{display:none} /* keep it simple; no JS menu */
 }
-
+body.compact .title{ font-size: clamp(36px, 6vw, 64px); }
+body.compact .lead{ font-size: clamp(15px, 1.9vw, 18px); }
+body.compact .phone{ width: min(330px, 88%); }
+body.compact .btn{ padding: 10px 16px; border-radius: 12px; }
+body.compact .section{ margin: 72px 0; }
 
 
 
