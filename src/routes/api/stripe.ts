@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { stripe, PLANS } from '../../../lib/stripe'
-import { getCurrentUser } from '../../../lib/get-current-user'
-import { db } from '../../../db'
-import { businesses } from '../../../db/schema'
+import { stripe, PLANS } from '../../lib/stripe'
+import { getCurrentUser } from '../../lib/get-current-user'
+import { db } from '../../db'
+import { businesses } from '../../db/schema'
 import { eq, and } from 'drizzle-orm'
 
-export const Route = createFileRoute('/api/stripe/checkout')({
+export const Route = createFileRoute('/api/stripe')({
   server: {
     handlers: {
       POST: async ({ request }) => {

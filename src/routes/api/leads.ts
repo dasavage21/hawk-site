@@ -1,8 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { db } from '../../db'
-import { leads, businesses } from '../../db/schema'
+import { leads, businesses, users } from '../../db/schema'
 import { getCurrentUser } from '../../lib/get-current-user'
 import { eq, and } from 'drizzle-orm'
+import { sendLeadNotification } from '../../lib/email'
 
 export const Route = createFileRoute('/api/leads')({
   server: {
@@ -55,6 +56,29 @@ export const Route = createFileRoute('/api/leads')({
             source: data.source || 'web',
           })
           .returning()
+
+        // Trigger email notification
+        try {
+          const businessWithUser = await db.query.businesses.findFirst({
+            where: eq(businesses.id, data.businessId),
+            with: {
+              user: true,
+            },
+          })
+
+          if (businessWithUser && businessWithUser.user) {
+            await sendLeadNotification({
+              to: businessWithUser.user.email,
+              businessName: businessWithUser.name,
+              leadName: newLead.name,
+              leadEmail: newLead.email,
+              leadPhone: newLead.phone,
+              leadMessage: newLead.message,
+            })
+          }
+        } catch (error) {
+          console.error('Notification trigger error:', error)
+        }
 
         return Response.json(newLead)
       },

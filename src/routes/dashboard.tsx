@@ -84,7 +84,7 @@ function DashboardPage() {
           <div className="flex items-center gap-3">
             <span className="text-sm text-gray-600">{user?.email}</span>
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 text-xs font-bold text-white">
-              {(user?.businessName || "U").charAt(0)}
+              {(user?.name || "U").charAt(0)}
             </div>
           </div>
         </header>
@@ -94,7 +94,7 @@ function DashboardPage() {
           <div className="mx-auto max-w-5xl">
             <div className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900">
-                Welcome back{user?.businessName ? `, ${user.businessName}` : ""}!
+                Welcome back!
               </h2>
               <p className="mt-1 text-gray-600">Here's your business at a glance.</p>
             </div>
