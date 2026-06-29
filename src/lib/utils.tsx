@@ -59,6 +59,7 @@ export interface PricingTier {
   features: string[];
   cta: string;
   highlighted?: boolean;
+  paymentLink: string;
 }
 
 export const PRICING_TIERS: PricingTier[] = [
@@ -74,6 +75,7 @@ export const PRICING_TIERS: PricingTier[] = [
       "Basic analytics",
     ],
     cta: "Start Free Trial",
+    paymentLink: "https://buy.stripe.com/dRm28r9L11ZWdxj4Jw9bO00",
   },
   {
     name: "Growth",
@@ -88,6 +90,7 @@ export const PRICING_TIERS: PricingTier[] = [
     ],
     cta: "Start Free Trial",
     highlighted: true,
+    paymentLink: "https://buy.stripe.com/14A9ATe1h7kgbpb4Jw9bO01",
   },
   {
     name: "Pro",
@@ -102,5 +105,6 @@ export const PRICING_TIERS: PricingTier[] = [
       "Priority support",
     ],
     cta: "Start Free Trial",
+    paymentLink: "https://buy.stripe.com/bJe6oH1ev6gc8cZ2Bo9bO02",
   },
 ];
