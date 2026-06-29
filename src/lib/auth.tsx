@@ -8,7 +8,7 @@ import {
 } from "react";
 import { useRouter } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { setResponseHeader, getWebRequest } from "@tanstack/react-start/server";
+import { setResponseHeader, getRequest } from "@tanstack/react-start/server";
 import { db } from "~/db";
 import { users, businesses } from "~/db/schema";
 import { hash, compare } from "bcryptjs";
@@ -126,7 +126,7 @@ const serverLogout = createServerFn({ method: "POST" }).handler(async () => {
 
 const serverGetSession = createServerFn({ method: "GET" }).handler(async () => {
   try {
-    const request = getWebRequest();
+    const request = getRequest();
     if (!request) return { user: null };
 
     const cookieHeader = request.headers.get("Cookie");

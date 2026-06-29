@@ -1,11 +1,11 @@
-import { getWebRequest } from "@tanstack/react-start/server";
+import { getRequest } from "@tanstack/react-start/server";
 import { decrypt } from "./session";
 import { db } from "~/db";
 import { users } from "~/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function getCurrentUser() {
-  const request = getWebRequest();
+  const request = getRequest();
   if (!request) return null;
 
   const cookieHeader = request.headers.get("Cookie");
