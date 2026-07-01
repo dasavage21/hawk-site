@@ -110,6 +110,18 @@ export const adPerformance = pgTable("ad_performance", {
   spend: integer("spend").notNull().default(0), // in cents
 });
 
+export const lsaProfiles = pgTable("lsa_profiles", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  businessId: uuid("business_id").references(() => businesses.id).notNull(),
+  licenseNumber: text("license_number"),
+  insuranceCarrier: text("insurance_carrier"),
+  insurancePolicyNumber: text("insurance_policy_number"),
+  status: text("status").notNull().default("not_started"), // not_started, pending_verification, active, suspended
+  googleLsaId: text("google_lsa_id"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
 // Relations
 export const usersRelations = relations(users, ({ many }) => ({
   businesses: many(businesses),
@@ -125,6 +137,7 @@ export const businessesRelations = relations(businesses, ({ one, many }) => ({
   subscriptions: many(subscriptions),
   adCampaigns: many(adCampaigns),
   keywordRankings: many(keywordRankings),
+  lsaProfile: one(lsaProfiles),
 }));
 
 export const sitesRelations = relations(sites, ({ one }) => ({
@@ -189,5 +202,12 @@ export const adPerformanceRelations = relations(adPerformance, ({ one }) => ({
   variation: one(adVariations, {
     fields: [adPerformance.variationId],
     references: [adVariations.id],
+  }),
+}));
+
+export const lsaProfilesRelations = relations(lsaProfiles, ({ one }) => ({
+  business: one(businesses, {
+    fields: [lsaProfiles.businessId],
+    references: [businesses.id],
   }),
 }));
