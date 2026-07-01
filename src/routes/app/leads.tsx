@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
-import { getBusinessData, getLeadsData } from "~/lib/get-business";
+import { createFileRoute, useSearch } from "@tanstack/react-router";
+import { getAllLocations, getAllLeadsData, getLeadsData } from "~/lib/get-business";
 import { cn } from "~/lib/utils";
 
 export const Route = createFileRoute("/app/leads")({
   component: LeadsPage,
-  loader: () => getBusinessData(),
+  loader: () => getAllLocations(),
 });
 
 interface Lead {
   id: string;
   businessId: string;
+  businessName?: string;
   name: string;
   email: string | null;
   phone: string | null;
@@ -20,8 +21,11 @@ interface Lead {
 }
 
 function LeadsPage() {
-  const { business } = Route.useLoaderData();
-  const [leads, setLeads] = useState<Lead[]>([]);
+  const { locations } = Route.useLoaderData();
+  const search = useSearch({ from: Route.id });
+  const businessIdParam = (search as any).businessId as string | undefined;
+
+  const [allLeads, setAllLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState("");
@@ -29,16 +33,16 @@ function LeadsPage() {
 
   // Filters
   const [sourceFilter, setSourceFilter] = useState<string>("all");
+  const [locationFilter, setLocationFilter] = useState<string>(businessIdParam || "all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Load leads
+  // Load leads from all locations
   const loadLeads = async () => {
-    if (!business?.id) return;
     setLoading(true);
     setError("");
     try {
-      const result = await getLeadsData({ businessId: business.id });
-      setLeads(result.leads as Lead[]);
+      const result = await getAllLeadsData();
+      setAllLeads(result.leads as Lead[]);
       setLoaded(true);
     } catch (err) {
       setError("Failed to load leads");
@@ -48,13 +52,14 @@ function LeadsPage() {
   };
 
   // Load on first render
-  if (!loaded && !loading && business?.id) {
+  if (!loaded && !loading) {
     loadLeads();
   }
 
   // Filter leads
-  const filteredLeads = leads.filter((lead) => {
+  const filteredLeads = allLeads.filter((lead) => {
     if (sourceFilter !== "all" && lead.source !== sourceFilter) return false;
+    if (locationFilter !== "all" && lead.businessId !== locationFilter) return false;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       return (
@@ -65,6 +70,9 @@ function LeadsPage() {
     }
     return true;
   });
+
+  // Enrich with location name
+  const locationNameMap = new Map(locations.map((l) => [l.id, l.name]));
 
   const formatDate = (dateStr: string | null) => {
     if (!dateStr) return "—";
@@ -93,16 +101,6 @@ function LeadsPage() {
     }
   };
 
-  if (!business) {
-    return (
-      <div className="flex items-center justify-center p-12">
-        <div className="text-center">
-          <p className="text-gray-500">Complete onboarding first to see leads.</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="p-6">
       <div className="mx-auto max-w-6xl">
@@ -111,14 +109,14 @@ function LeadsPage() {
           <h2 className="text-2xl font-bold text-gray-900">Leads</h2>
           <p className="mt-1 text-gray-600">
             {loaded
-              ? `${leads.length} total lead${leads.length !== 1 ? "s" : ""}`
-              : "Loading your leads..."}
+              ? `${allLeads.length} total lead${allLeads.length !== 1 ? "s" : ""} across ${locations.length} location${locations.length !== 1 ? "s" : ""}`
+              : "Loading leads..."}
           </p>
         </div>
 
         {/* Filters */}
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <div className="relative">
               <svg className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8" />
@@ -129,9 +127,19 @@ function LeadsPage() {
                 placeholder="Search leads..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-64 rounded-lg border border-gray-300 py-2 pl-10 pr-4 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none"
+                className="w-48 rounded-lg border border-gray-300 py-2 pl-10 pr-4 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none sm:w-64"
               />
             </div>
+            <select
+              value={locationFilter}
+              onChange={(e) => setLocationFilter(e.target.value)}
+              className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+            >
+              <option value="all">All Locations</option>
+              {locations.map((loc) => (
+                <option key={loc.id} value={loc.id}>{loc.name}</option>
+              ))}
+            </select>
             <select
               value={sourceFilter}
               onChange={(e) => setSourceFilter(e.target.value)}
@@ -159,9 +167,7 @@ function LeadsPage() {
         </div>
 
         {error && (
-          <div className="mb-6 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
-            {error}
-          </div>
+          <div className="mb-6 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div>
         )}
 
         {loading && !loaded && (
@@ -181,12 +187,12 @@ function LeadsPage() {
               </svg>
             </div>
             <h3 className="mt-4 text-lg font-semibold text-gray-900">
-              {searchQuery || sourceFilter !== "all" ? "No matching leads" : "No leads yet"}
+              {searchQuery || sourceFilter !== "all" || locationFilter !== "all" ? "No matching leads" : "No leads yet"}
             </h3>
             <p className="mt-2 text-sm text-gray-500">
-              {searchQuery || sourceFilter !== "all"
+              {searchQuery || sourceFilter !== "all" || locationFilter !== "all"
                 ? "Try adjusting your search or filters."
-                : "Leads will appear here when visitors interact with your website."}
+                : "Leads will appear here when visitors interact with your websites."}
             </p>
           </div>
         )}
@@ -200,6 +206,7 @@ function LeadsPage() {
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Name</th>
                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Contact</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Location</th>
                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Source</th>
                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Date</th>
                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Message</th>
@@ -215,22 +222,17 @@ function LeadsPage() {
                         selectedLead?.id === lead.id && "bg-indigo-50/50"
                       )}
                     >
-                      <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">
-                        {lead.name}
-                      </td>
+                      <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">{lead.name}</td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-600">
                         <div>{lead.email || "—"}</div>
                         <div className="text-xs text-gray-400">{lead.phone || ""}</div>
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4">
-                        {getSourceBadge(lead.source)}
-                      </td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-600">
-                        {formatDate(lead.createdAt)}
+                        {lead.businessName || locationNameMap.get(lead.businessId) || "—"}
                       </td>
-                      <td className="max-w-xs truncate px-6 py-4 text-sm text-gray-500">
-                        {lead.message || "—"}
-                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">{getSourceBadge(lead.source)}</td>
+                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-600">{formatDate(lead.createdAt)}</td>
+                      <td className="max-w-xs truncate px-6 py-4 text-sm text-gray-500">{lead.message || "—"}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -249,6 +251,7 @@ function LeadsPage() {
                     <div>
                       <p className="font-medium text-gray-900">{lead.name}</p>
                       <p className="mt-0.5 text-sm text-gray-500">{lead.email || lead.phone || "—"}</p>
+                      <p className="mt-0.5 text-xs text-gray-400">{lead.businessName || locationNameMap.get(lead.businessId) || ""}</p>
                     </div>
                     {getSourceBadge(lead.source)}
                   </div>
@@ -265,13 +268,9 @@ function LeadsPage() {
               <div className="mt-6 rounded-xl border border-indigo-100 bg-white p-6 shadow-sm ring-1 ring-indigo-500/20">
                 <div className="flex items-start justify-between">
                   <h3 className="text-lg font-semibold text-gray-900">Lead Details</h3>
-                  <button
-                    onClick={() => setSelectedLead(null)}
-                    className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
-                  >
+                  <button onClick={() => setSelectedLead(null)} className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600">
                     <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="18" y1="6" x2="6" y2="18" />
-                      <line x1="6" y1="6" x2="18" y2="18" />
+                      <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
                     </svg>
                   </button>
                 </div>
@@ -292,16 +291,18 @@ function LeadsPage() {
                     <p className="text-xs font-medium uppercase tracking-wider text-gray-500">Phone</p>
                     <p className="mt-1 text-sm text-gray-900">{selectedLead.phone || "—"}</p>
                   </div>
-                  <div className="sm:col-span-2">
+                  <div>
+                    <p className="text-xs font-medium uppercase tracking-wider text-gray-500">Location</p>
+                    <p className="mt-1 text-sm text-gray-900">{selectedLead.businessName || locationNameMap.get(selectedLead.businessId) || "—"}</p>
+                  </div>
+                  <div>
                     <p className="text-xs font-medium uppercase tracking-wider text-gray-500">Date</p>
                     <p className="mt-1 text-sm text-gray-900">{formatDate(selectedLead.createdAt)}</p>
                   </div>
                   {selectedLead.message && (
                     <div className="sm:col-span-2">
                       <p className="text-xs font-medium uppercase tracking-wider text-gray-500">Message</p>
-                      <p className="mt-1 whitespace-pre-wrap rounded-lg bg-gray-50 p-3 text-sm text-gray-900">
-                        {selectedLead.message}
-                      </p>
+                      <p className="mt-1 whitespace-pre-wrap rounded-lg bg-gray-50 p-3 text-sm text-gray-900">{selectedLead.message}</p>
                     </div>
                   )}
                 </div>
@@ -310,9 +311,9 @@ function LeadsPage() {
           </>
         )}
 
-        {loaded && !loading && leads.length > 0 && (
+        {loaded && !loading && allLeads.length > 0 && (
           <p className="mt-4 text-center text-xs text-gray-400">
-            Showing {filteredLeads.length} of {leads.length} leads
+            Showing {filteredLeads.length} of {allLeads.length} leads
           </p>
         )}
       </div>

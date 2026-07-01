@@ -49,35 +49,6 @@ export const subscriptions = pgTable("subscriptions", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-// Relations
-export const usersRelations = relations(users, ({ many }) => ({
-  businesses: many(businesses),
-}));
-
-export const businessesRelations = relations(businesses, ({ one, many }) => ({
-  user: one(users, {
-    fields: [businesses.userId],
-    references: [users.id],
-  }),
-  sites: many(sites),
-  leads: many(leads),
-  subscriptions: many(subscriptions),
-}));
-
-export const sitesRelations = relations(sites, ({ one }) => ({
-  business: one(businesses, {
-    fields: [sites.businessId],
-    references: [businesses.id],
-  }),
-}));
-
-export const leadsRelations = relations(leads, ({ one }) => ({
-  business: one(businesses, {
-    fields: [leads.businessId],
-    references: [businesses.id],
-  }),
-}));
-
 export const conversations = pgTable("conversations", {
   id: uuid("id").primaryKey().defaultRandom(),
   businessId: uuid("business_id").references(() => businesses.id).notNull(),
@@ -98,6 +69,78 @@ export const notifications = pgTable("notifications", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+export const keywordRankings = pgTable("keyword_rankings", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  businessId: uuid("business_id").references(() => businesses.id).notNull(),
+  keyword: text("keyword").notNull(),
+  position: integer("position"),
+  previousPosition: integer("previous_position"),
+  searchVolume: integer("search_volume"),
+  checkedAt: timestamp("checked_at").defaultNow().notNull(),
+});
+
+export const adCampaigns = pgTable("ad_campaigns", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  businessId: uuid("business_id").references(() => businesses.id).notNull(),
+  platform: text("platform").notNull(), // google, facebook, etc.
+  name: text("name").notNull(),
+  budget: integer("budget").notNull(), // in cents
+  status: text("status").notNull().default("active"), // active, paused, ended
+  startDate: timestamp("start_date"),
+  endDate: timestamp("end_date"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const adVariations = pgTable("ad_variations", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  campaignId: uuid("campaign_id").references(() => adCampaigns.id).notNull(),
+  copy: text("copy").notNull(),
+  imageUrl: text("image_url"),
+  status: text("status").notNull().default("active"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const adPerformance = pgTable("ad_performance", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  variationId: uuid("variation_id").references(() => adVariations.id).notNull(),
+  date: timestamp("date").notNull(),
+  clicks: integer("clicks").notNull().default(0),
+  impressions: integer("impressions").notNull().default(0),
+  conversions: integer("conversions").notNull().default(0),
+  spend: integer("spend").notNull().default(0), // in cents
+});
+
+// Relations
+export const usersRelations = relations(users, ({ many }) => ({
+  businesses: many(businesses),
+}));
+
+export const businessesRelations = relations(businesses, ({ one, many }) => ({
+  user: one(users, {
+    fields: [businesses.userId],
+    references: [users.id],
+  }),
+  sites: many(sites),
+  leads: many(leads),
+  subscriptions: many(subscriptions),
+  adCampaigns: many(adCampaigns),
+  keywordRankings: many(keywordRankings),
+}));
+
+export const sitesRelations = relations(sites, ({ one }) => ({
+  business: one(businesses, {
+    fields: [sites.businessId],
+    references: [businesses.id],
+  }),
+}));
+
+export const leadsRelations = relations(leads, ({ one }) => ({
+  business: one(businesses, {
+    fields: [leads.businessId],
+    references: [businesses.id],
+  }),
+}));
+
 export const subscriptionsRelations = relations(subscriptions, ({ one }) => ({
   business: one(businesses, {
     fields: [subscriptions.businessId],
@@ -116,5 +159,35 @@ export const conversationsRelations = relations(conversations, ({ one }) => ({
   business: one(businesses, {
     fields: [conversations.businessId],
     references: [businesses.id],
+  }),
+}));
+
+export const keywordRankingsRelations = relations(keywordRankings, ({ one }) => ({
+  business: one(businesses, {
+    fields: [keywordRankings.businessId],
+    references: [businesses.id],
+  }),
+}));
+
+export const adCampaignsRelations = relations(adCampaigns, ({ one, many }) => ({
+  business: one(businesses, {
+    fields: [adCampaigns.businessId],
+    references: [businesses.id],
+  }),
+  variations: many(adVariations),
+}));
+
+export const adVariationsRelations = relations(adVariations, ({ one, many }) => ({
+  campaign: one(adCampaigns, {
+    fields: [adVariations.campaignId],
+    references: [adCampaigns.id],
+  }),
+  performance: many(adPerformance),
+}));
+
+export const adPerformanceRelations = relations(adPerformance, ({ one }) => ({
+  variation: one(adVariations, {
+    fields: [adPerformance.variationId],
+    references: [adVariations.id],
   }),
 }));

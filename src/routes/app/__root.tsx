@@ -1,5 +1,7 @@
 import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
 import { useAuth } from "~/lib/auth";
+import { useState } from "react";
+import { cn } from "~/lib/utils";
 
 export const Route = createFileRoute("/app/__root")({
   component: AppLayout,
@@ -28,6 +30,16 @@ const NAV_ITEMS = [
     ),
   },
   {
+    label: "Locations",
+    path: "/app/locations",
+    icon: (
+      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+        <circle cx="12" cy="10" r="3" />
+      </svg>
+    ),
+  },
+  {
     label: "Website",
     path: "/app/website",
     icon: (
@@ -50,9 +62,83 @@ const NAV_ITEMS = [
   },
 ];
 
-function AppLayout() {
-  const { user, isLoading, logout } = useAuth();
+function Sidebar({ mobileOpen, onClose }: { mobileOpen: boolean; onClose: () => void }) {
+  const { logout } = useAuth();
   const location = useLocation();
+
+  const nav = (
+    <nav className="flex flex-col h-full">
+      <div className="flex items-center gap-2 border-b border-gray-100 px-6 py-5">
+        <Link to="/" onClick={onClose} className="flex items-center gap-2 text-base font-bold text-gray-900">
+          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-600 to-violet-600 text-xs font-bold text-white">
+            L
+          </span>
+          LocalAmp
+        </Link>
+      </div>
+      <div className="flex-1 space-y-1 px-3 py-4">
+        {NAV_ITEMS.map((item) => {
+          const isActive =
+            item.path === "/app"
+              ? location.pathname === "/app"
+              : location.pathname.startsWith(item.path);
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              onClick={onClose}
+              className={cn(
+                "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                isActive
+                  ? "bg-indigo-50 text-indigo-700"
+                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+              )}
+            >
+              {item.icon}
+              {item.label}
+            </Link>
+          );
+        })}
+      </div>
+      <div className="border-t border-gray-100 px-3 py-4">
+        <button
+          onClick={logout}
+          className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50"
+        >
+          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" />
+          </svg>
+          Log out
+        </button>
+      </div>
+    </nav>
+  );
+
+  return (
+    <>
+      {/* Desktop sidebar */}
+      <aside className="hidden w-64 flex-col border-r border-gray-200 bg-white lg:flex">
+        {nav}
+      </aside>
+
+      {/* Mobile sidebar overlay */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-40 lg:hidden">
+          <div className="absolute inset-0 bg-black/30" onClick={onClose} />
+          <aside className="relative w-64 bg-white h-full shadow-xl">
+            {nav}
+          </aside>
+        </div>
+      )}
+    </>
+  );
+}
+
+function AppLayout() {
+  const { user, isLoading } = useAuth();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   if (isLoading) {
     return (
@@ -67,69 +153,23 @@ function AppLayout() {
 
   return (
     <div className="flex min-h-dvh bg-gray-50">
-      {/* Sidebar */}
-      <aside className="hidden w-64 flex-col border-r border-gray-200 bg-white lg:flex">
-        <div className="flex items-center gap-2 border-b border-gray-100 px-6 py-5">
-          <Link to="/" className="flex items-center gap-2 text-base font-bold text-gray-900">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-600 to-violet-600 text-xs font-bold text-white">
-              L
-            </span>
-            LocalAmp
-          </Link>
-        </div>
-        <nav className="flex-1 space-y-1 px-3 py-4">
-          {NAV_ITEMS.map((item) => {
-            const isActive =
-              item.path === "/app"
-                ? location.pathname === "/app"
-                : location.pathname.startsWith(item.path);
-            return (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
-                  isActive
-                    ? "bg-indigo-50 text-indigo-700"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                }`}
-              >
-                {item.icon}
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
-        <div className="border-t border-gray-100 px-3 py-4">
-          <button
-            onClick={logout}
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50"
-          >
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-              <polyline points="16 17 21 12 16 7" />
-              <line x1="21" y1="12" x2="9" y2="12" />
-            </svg>
-            Log out
-          </button>
-        </div>
-      </aside>
+      <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
       {/* Main area */}
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col min-w-0">
         {/* Top bar */}
-        <header className="flex items-center justify-between border-b border-gray-200 bg-white px-6 py-4">
-          {/* Mobile menu toggle */}
+        <header className="flex items-center justify-between border-b border-gray-200 bg-white px-4 py-4 sm:px-6">
           <div className="flex items-center gap-3">
-            <label htmlFor="mobile-menu" className="lg:hidden">
-              <svg className="h-5 w-5 text-gray-600 cursor-pointer" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <button onClick={() => setMobileOpen(true)} className="rounded-lg p-1.5 text-gray-600 hover:bg-gray-100 lg:hidden">
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <line x1="3" y1="12" x2="21" y2="12" />
                 <line x1="3" y1="18" x2="21" y2="18" />
               </svg>
-            </label>
+            </button>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-600">{user?.email}</span>
+            <span className="hidden text-sm text-gray-600 sm:block">{user?.email}</span>
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 text-xs font-bold text-white">
               {(user?.name || "U").charAt(0).toUpperCase()}
             </div>
