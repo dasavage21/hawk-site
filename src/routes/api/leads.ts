@@ -4,6 +4,7 @@ import { leads, businesses, users } from '../../db/schema'
 import { getCurrentUser } from '../../lib/get-current-user'
 import { eq, and } from 'drizzle-orm'
 import { sendLeadNotification } from '../../lib/email'
+import { sendLeadSMSNotification } from '../../lib/sms'
 
 export const Route = createFileRoute('/api/leads')({
   server: {
@@ -57,7 +58,7 @@ export const Route = createFileRoute('/api/leads')({
           })
           .returning()
 
-        // Trigger email notification
+        // Trigger notifications
         try {
           const businessWithUser = await db.query.businesses.findFirst({
             where: eq(businesses.id, data.businessId),
@@ -66,15 +67,30 @@ export const Route = createFileRoute('/api/leads')({
             },
           })
 
-          if (businessWithUser && businessWithUser.user) {
-            await sendLeadNotification({
-              to: businessWithUser.user.email,
-              businessName: businessWithUser.name,
-              leadName: newLead.name,
-              leadEmail: newLead.email,
-              leadPhone: newLead.phone,
-              leadMessage: newLead.message,
-            })
+          if (businessWithUser) {
+            // Email notification
+            if (businessWithUser.user) {
+              await sendLeadNotification({
+                businessId: data.businessId,
+                to: businessWithUser.user.email,
+                businessName: businessWithUser.name,
+                leadName: newLead.name,
+                leadEmail: newLead.email,
+                leadPhone: newLead.phone,
+                leadMessage: newLead.message,
+              })
+            }
+
+            // SMS notification (parallel channel)
+            if (businessWithUser.phone) {
+              await sendLeadSMSNotification({
+                businessId: data.businessId,
+                to: businessWithUser.phone,
+                businessName: businessWithUser.name,
+                leadName: newLead.name,
+                leadPhone: newLead.phone,
+              })
+            }
           }
         } catch (error) {
           console.error('Notification trigger error:', error)

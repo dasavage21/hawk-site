@@ -78,9 +78,43 @@ export const leadsRelations = relations(leads, ({ one }) => ({
   }),
 }));
 
+export const conversations = pgTable("conversations", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  businessId: uuid("business_id").references(() => businesses.id).notNull(),
+  sessionId: text("session_id").notNull(),
+  messages: text("messages").notNull().default("[]"), // JSON array of {role, content}
+  status: text("status").notNull().default("active"), // active, qualified, abandoned
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const notifications = pgTable("notifications", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  businessId: uuid("business_id").references(() => businesses.id).notNull(),
+  type: text("type").notNull(), // email, sms
+  recipient: text("recipient").notNull(),
+  status: text("status").notNull(), // sent, failed
+  error: text("error"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 export const subscriptionsRelations = relations(subscriptions, ({ one }) => ({
   business: one(businesses, {
     fields: [subscriptions.businessId],
+    references: [businesses.id],
+  }),
+}));
+
+export const notificationsRelations = relations(notifications, ({ one }) => ({
+  business: one(businesses, {
+    fields: [notifications.businessId],
+    references: [businesses.id],
+  }),
+}));
+
+export const conversationsRelations = relations(conversations, ({ one }) => ({
+  business: one(businesses, {
+    fields: [conversations.businessId],
     references: [businesses.id],
   }),
 }));

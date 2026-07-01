@@ -1,8 +1,11 @@
 import { Resend } from 'resend';
+import { db } from '../db';
+import { notifications } from '../db/schema';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder');
 
 export async function sendLeadNotification({
+  businessId,
   to,
   businessName,
   leadName,
@@ -10,6 +13,7 @@ export async function sendLeadNotification({
   leadPhone,
   leadMessage,
 }: {
+  businessId: string;
   to: string;
   businessName: string;
   leadName: string;
@@ -23,7 +27,7 @@ export async function sendLeadNotification({
   }
 
   try {
-    await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: 'LocalAmp <notifications@localamp.ai>',
       to: [to],
       subject: `New Lead for ${businessName}: ${leadName}`,
@@ -36,11 +40,31 @@ export async function sendLeadNotification({
         <p><strong>Message:</strong></p>
         <p>${leadMessage || 'No message provided'}</p>
         <hr />
-        <p><a href="${process.env.APP_URL}/dashboard">View in Dashboard</a></p>
+        <p><a href="${process.env.APP_URL || 'https://localamp.ai'}/dashboard">View in Dashboard</a></p>
       `,
     });
+
+    if (error) {
+      throw error;
+    }
+
+    await db.insert(notifications).values({
+      businessId,
+      type: 'email',
+      recipient: to,
+      status: 'sent',
+    });
+
     console.log(`Email notification sent to ${to} for lead ${leadName}`);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to send email notification:', error);
+    
+    await db.insert(notifications).values({
+      businessId,
+      type: 'email',
+      recipient: to,
+      status: 'failed',
+      error: error.message || 'Unknown error',
+    });
   }
 }
