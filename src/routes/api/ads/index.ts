@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { db } from "../../../db";
-import { adCampaigns } from "../../../db/schema";
+import { adCampaigns, adVariations } from "../../../db/schema";
 import { eq, desc } from "drizzle-orm";
 
 export const Route = createFileRoute("/api/ads/")({
