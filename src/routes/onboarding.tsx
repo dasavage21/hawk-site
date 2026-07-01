@@ -2,8 +2,16 @@ import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useAuth } from "~/lib/auth";
 import { getBusinessData } from "~/lib/get-business";
-import { completeOnboarding } from "~/lib/onboarding";
 import { cn } from "~/lib/utils";
+
+async function apiCompleteOnboarding(data: any) {
+  const res = await fetch("/api/onboarding/complete", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return res.json();
+}
 
 export const Route = createFileRoute("/onboarding")({
   component: OnboardingPage,
@@ -198,7 +206,7 @@ function OnboardingContent({ business, site }: { business: any; site: any }) {
         .replace(/[^a-z0-9]/g, "-")
         .slice(0, 30);
 
-      const result = await completeOnboarding({
+      const result = await apiCompleteOnboarding({
         businessId: business.id,
         phone,
         address,
