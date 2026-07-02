@@ -33,6 +33,7 @@ export const Route = createFileRoute('/api/auth/signup')({
               .values({
                 email: data.email,
                 passwordHash,
+                name: data.businessName,
               })
               .returning()
 

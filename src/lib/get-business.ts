@@ -121,25 +121,27 @@ export async function createLocation(data: {
     const business = await bizRes.json()
     if (!business.id) return { success: false, error: 'Failed to create business' }
 
-    // Generate website via site generator API
-    const siteRes = await fetch('/api/sites', {
+    // Generate website via onboarding complete which handles site generation
+    const siteRes = await fetch('/api/onboarding/complete', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         businessId: business.id,
-        name: data.name,
-        industry: data.industry,
         phone: data.phone,
         address: data.address,
         city: data.city,
         state: data.state,
         zip: data.zip,
+        industry: data.industry,
         services: data.services,
         description: data.description,
+        subdomain: data.name.toLowerCase().replace(/[^a-z0-9]/g, '-').slice(0, 30),
       }),
     })
-    const site = await siteRes.json()
-    return { success: true, business, site }
+    const result = await siteRes.json()
+    return result.success
+      ? { success: true, business: result.business, site: result.site }
+      : { success: false, error: result.error || 'Failed to generate website' }
   } catch (e: any) {
     return { success: false, error: e.message }
   }
