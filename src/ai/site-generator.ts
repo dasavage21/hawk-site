@@ -42,7 +42,7 @@ function generateChatEmbed(businessName: string, industry: string): string {
     `var d=document.getElementById('localamp-chat');`,
     `if(!d)return; d.style.display='block';`,
     `var s=d.createElement('script');`,
-    `s.src='/api/embed/chat-embed.js';`,
+    `s.src='/api/embed/chat-embed';`,
     `s.async=true;`,
     `d.parentNode.appendChild(s);`,
     `})();`,

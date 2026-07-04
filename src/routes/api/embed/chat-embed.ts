@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 /**
  * GET /api/embed/chat-embed.js — Self-contained chat widget embed script.
  */
-export const Route = createFileRoute("/api/embed/chat-embed/js")({
+export const Route = createFileRoute("/api/embed/chat-embed")({
   server: {
     handlers: {
       GET: async () => {
@@ -55,6 +55,6 @@ export function generateEmbedSnippet(businessId: string, industry: string): stri
   return [
     `<!-- LocalAmp Chat Widget -->`,
     `<div id="localamp-chat" data-business-id="${businessId}" data-industry="${industry}"></div>`,
-    `<script src="/api/embed/chat-embed.js" async></script>`,
+    `<script src="/api/embed/chat-embed" async></script>`,
   ].join("\n");
 }
